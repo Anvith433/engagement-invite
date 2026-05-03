@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ankitha & Kishan — Engagement</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream:        #F7F2E8;
+    --cream-deep:   #EDE5D0;
+    --green-light:  #C8DBBE;
+    --green-mid:    #8DB89A;
+    --green-dark:   #3D6B50;
+    --green-rich:   #2A4F38;
+    --gold:         #C9A84C;
+    --gold-light:   #E8CC80;
+    --text-dark:    #2A3626;
+    --text-mid:     #4E6B5A;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100dvh;
+    background-color: var(--cream);
+    background-image:
+      radial-gradient(ellipse at 20% 20%, rgba(141,184,154,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 80%, rgba(200,219,190,0.22) 0%, transparent 55%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 0 Q32 30 30 60 Q28 30 30 0Z' fill='%238DB89A' fill-opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 100% 100%, 100% 100%, 60px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Jost', sans-serif;
+    overflow: hidden;
+    user-select: none;
+  }
+
+  .scene {
+    perspective: 1400px;
+    width: min(420px, 92vw);
+    height: min(600px, 86dvh);
+    position: relative;
+  }
+
+  .card {
+    width: 100%; height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.55s cubic-bezier(.645,.045,.355,1);
+    cursor: pointer;
+  }
+  .card.flipping { transform: rotateY(90deg); }
+  .card.unflipping { transform: rotateY(0deg); }
+
+  .card-face {
+    position: absolute; inset: 0;
+    backface-visibility: hidden;
+    border-radius: 28px;
+    background: linear-gradient(160deg, var(--cream) 0%, #F4EDD8 100%);
+    box-shadow:
+      0 4px 6px rgba(42,79,56,0.06),
+      0 12px 40px rgba(42,79,56,0.13),
+      0 2px 0px rgba(201,168,76,0.35),
+      inset 0 0 0 1.5px rgba(201,168,76,0.30);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 36px 32px 28px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .card-face::before, .card-face::after {
+    content: '';
+    position: absolute;
+    width: 100px; height: 100px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M10 90 Q10 10 90 10' stroke='%23C9A84C' stroke-width='1.5' fill='none' opacity='0.5'/%3E%3Ccircle cx='10' cy='90' r='3' fill='%23C9A84C' opacity='0.5'/%3E%3Ccircle cx='90' cy='10' r='3' fill='%23C9A84C' opacity='0.5'/%3E%3Cpath d='M25 75 Q25 25 75 25' stroke='%238DB89A' stroke-width='1' fill='none' opacity='0.4'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .card-face::before { top: 0; left: 0; }
+  .card-face::after  { bottom: 0; right: 0; transform: rotate(180deg); }
+
+  .page { display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; animation: fadeIn 0.4s ease; }
+  .page.active { display: flex; }
+  @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+
+  .divider {
+    width: 120px; height: 18px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 18'%3E%3Cline x1='0' y1='9' x2='45' y2='9' stroke='%23C9A84C' stroke-width='1' opacity='0.6'/%3E%3Ccircle cx='60' cy='9' r='5' fill='none' stroke='%23C9A84C' stroke-width='1' opacity='0.6'/%3E%3Ccircle cx='60' cy='9' r='2' fill='%23C9A84C' opacity='0.5'/%3E%3Cline x1='75' y1='9' x2='120' y2='9' stroke='%23C9A84C' stroke-width='1' opacity='0.6'/%3E%3C/svg%3E");
+    margin: 14px auto;
+  }
+
+  .leaf-top {
+    width: 180px; height: 48px; margin-bottom: 10px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 48'%3E%3Cpath d='M90 48 Q60 20 20 24 Q50 10 90 14 Q130 10 160 24 Q120 20 90 48Z' fill='%238DB89A' opacity='0.35'/%3E%3Cpath d='M90 44 Q65 22 30 26' stroke='%233D6B50' stroke-width='0.8' fill='none' opacity='0.4'/%3E%3Cpath d='M90 44 Q115 22 150 26' stroke='%233D6B50' stroke-width='0.8' fill='none' opacity='0.4'/%3E%3Ccircle cx='90' cy='14' r='3' fill='%23C9A84C' opacity='0.5'/%3E%3C/svg%3E");
+  }
+
+  .tag-engagement {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--green-mid); margin-bottom: 6px;
+  }
+  .couple-names {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(44px, 12vw, 62px);
+    color: var(--green-rich); text-align: center; line-height: 1.15;
+  }
+  .ampersand {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: clamp(22px, 6vw, 30px);
+    color: var(--gold); display: block; margin: 2px 0;
+  }
+
+  .countdown-label {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 20px; color: var(--text-mid); margin-bottom: 20px; text-align: center;
+  }
+  .countdown-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 10px; width: 100%; max-width: 340px;
+  }
+  .countdown-block {
+    background: linear-gradient(135deg, var(--green-rich) 0%, var(--green-dark) 100%);
+    border-radius: 14px; padding: 14px 6px 10px;
+    display: flex; flex-direction: column; align-items: center;
+    box-shadow: 0 4px 14px rgba(42,79,56,0.18), inset 0 1px 0 rgba(255,255,255,0.1);
+    position: relative; overflow: hidden;
+  }
+  .countdown-block::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+    opacity: 0.5;
+  }
+  .countdown-num {
+    font-family: 'Cormorant Garamond', serif; font-weight: 600;
+    font-size: clamp(28px, 8vw, 38px); color: var(--cream); line-height: 1;
+  }
+  .countdown-unit {
+    font-family: 'Jost', sans-serif; font-size: 9px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--green-light); margin-top: 4px;
+  }
+
+  .venue-icon { width: 52px; height: 52px; margin-bottom: 8px; }
+  .venue-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 13px;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 8px;
+  }
+  .venue-name {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(36px, 10vw, 48px);
+    color: var(--green-rich); text-align: center; line-height: 1.2;
+  }
+  .venue-place {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 19px; color: var(--text-mid); margin-top: 4px;
+  }
+  .venue-date-box {
+    margin-top: 18px;
+    background: linear-gradient(135deg, var(--green-light), #D4E8CA);
+    border-radius: 12px; padding: 12px 28px;
+    border: 1px solid rgba(61,107,80,0.2);
+  }
+  .venue-date-text {
+    font-family: 'Cormorant Garamond', serif; font-weight: 500;
+    font-size: 17px; color: var(--green-rich); text-align: center;
+  }
+  .venue-date-text span {
+    display: block; font-style: italic; font-size: 13px;
+    color: var(--text-mid); margin-top: 2px;
+  }
+
+  .msg-heading {
+    font-family: 'Cormorant Garamond', serif; font-size: 13px;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 12px;
+  }
+  .msg-body {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: clamp(17px, 4.5vw, 21px);
+    color: var(--text-dark); text-align: center; line-height: 1.7;
+  }
+  .msg-sign {
+    font-family: 'Great Vibes', cursive;
+    font-size: 30px; color: var(--green-dark); margin-top: 14px;
+  }
+
+  .photo-frame {
+    width: 220px; height: 260px; border-radius: 18px; overflow: hidden;
+    box-shadow: 0 6px 28px rgba(42,79,56,0.22),
+      0 0 0 3px var(--cream), 0 0 0 6px rgba(201,168,76,0.35);
+    background: linear-gradient(135deg, var(--green-light), var(--green-mid));
+  }
+  .photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .photo-placeholder {
+    width: 100%; height: 100%; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    color: var(--green-rich); font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 15px; text-align: center; padding: 16px; cursor: pointer;
+  }
+  .photo-caption {
+    font-family: 'Great Vibes', cursive;
+    font-size: 28px; color: var(--green-rich); margin-top: 14px; text-align: center;
+  }
+
+  .click-hint {
+    position: absolute; bottom: 18px; right: 22px;
+    font-family: 'Jost', sans-serif; font-size: 10px;
+    letter-spacing: 2px; color: var(--text-mid); opacity: 0.55;
+    text-transform: uppercase; display: flex; align-items: center; gap: 5px;
+    pointer-events: none;
+  }
+  .click-hint svg { width: 12px; height: 12px; }
+
+  .page-counter { margin-top: 18px; display: flex; align-items: center; gap: 10px; }
+  .page-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-mid); opacity: 0.3;
+    transition: all 0.3s ease; cursor: pointer;
+  }
+  .page-dot.active { opacity: 1; background: var(--green-rich); transform: scale(1.3); }
+  .page-num-label {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 15px; color: var(--text-mid); letter-spacing: 1px;
+    min-width: 28px; text-align: center;
+  }
+
+  .bg-ring {
+    position: fixed; width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(141,184,154,0.12) 0%, transparent 70%);
+    pointer-events: none; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse-ring 6s ease-in-out infinite;
+  }
+  @keyframes pulse-ring {
+    0%,100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
+    50%      { opacity: 1;   transform: translate(-50%,-50%) scale(1.08); }
+  }
+
+  @media (max-height: 680px) {
+    .scene { height: 82dvh; }
+    .card-face { padding: 22px 28px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-ring"></div>
+
+<div class="scene">
+  <div class="card" id="card" onclick="advance()">
+    <div class="card-face">
+
+      <!-- PAGE 1: COUPLE NAMES -->
+      <div class="page active" id="page-1">
+        <div class="leaf-top"></div>
+        <p class="tag-engagement">✦ You are invited to ✦</p>
+        <div class="divider"></div>
+        <svg class="ring-svg" style="width:60px;height:60px;margin-bottom:4px;" viewBox="0 0 60 60" fill="none">
+          <circle cx="22" cy="32" r="14" stroke="#C9A84C" stroke-width="2" fill="none" opacity="0.7"/>
+          <circle cx="38" cy="32" r="14" stroke="#C9A84C" stroke-width="2" fill="none" opacity="0.7"/>
+          <circle cx="22" cy="22" r="5" fill="#C9A84C" opacity="0.5"/>
+          <circle cx="22" cy="22" r="3" fill="#E8CC80" opacity="0.7"/>
+          <path d="M19 22 L22 18 L25 22" stroke="#C9A84C" stroke-width="1" fill="none"/>
+        </svg>
+        <div class="couple-names">
+          Ankitha
+          <span class="ampersand">&amp;</span>
+          Kishan
+        </div>
+        <div class="divider"></div>
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--text-mid);margin-top:10px;letter-spacing:1px;">Engagement — 13th May 2026</p>
+      </div>
+
+      <!-- PAGE 2: COUNTDOWN -->
+      <div class="page" id="page-2">
+        <svg style="width:200px;height:50px;margin-bottom:6px;" viewBox="0 0 200 50" fill="none">
+          <g opacity="0.5">
+            <circle cx="100" cy="25" r="6" fill="#C9A84C" opacity="0.6"/>
+            <circle cx="100" cy="25" r="3" fill="#E8CC80"/>
+            <ellipse cx="100" cy="13" rx="3" ry="5" fill="#8DB89A" opacity="0.7"/>
+            <ellipse cx="100" cy="37" rx="3" ry="5" fill="#8DB89A" opacity="0.7"/>
+            <ellipse cx="88" cy="25" rx="5" ry="3" fill="#8DB89A" opacity="0.7"/>
+            <ellipse cx="112" cy="25" rx="5" ry="3" fill="#8DB89A" opacity="0.7"/>
+            <path d="M80 25 Q60 10 40 20 Q60 22 80 25Z" fill="#3D6B50" opacity="0.35"/>
+            <path d="M120 25 Q140 10 160 20 Q140 22 120 25Z" fill="#3D6B50" opacity="0.35"/>
+          </g>
+        </svg>
+        <p class="countdown-label">Counting down to their<br/>special day…</p>
+        <div class="countdown-grid" id="countdown-grid">
+          <div class="countdown-block"><span class="countdown-num" id="cd-days">00</span><span class="countdown-unit">Days</span></div>
+          <div class="countdown-block"><span class="countdown-num" id="cd-hours">00</span><span class="countdown-unit">Hours</span></div>
+          <div class="countdown-block"><span class="countdown-num" id="cd-mins">00</span><span class="countdown-unit">Mins</span></div>
+          <div class="countdown-block"><span class="countdown-num" id="cd-secs">00</span><span class="countdown-unit">Secs</span></div>
+        </div>
+        <div class="divider" style="margin-top:18px;"></div>
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--text-mid);margin-top:4px;">13th May 2026 — with love</p>
+      </div>
+
+      <!-- PAGE 3: VENUE -->
+      <div class="page" id="page-3">
+        <p class="venue-title">✦ Venue ✦</p>
+        <svg class="venue-icon" viewBox="0 0 52 52" fill="none">
+          <path d="M6 46 L6 22 L26 10 L46 22 L46 46Z" fill="#C8DBBE" opacity="0.6"/>
+          <path d="M6 22 L26 10 L46 22" stroke="#3D6B50" stroke-width="1.5" fill="none"/>
+          <rect x="20" y="32" width="12" height="14" rx="2" fill="#3D6B50" opacity="0.4"/>
+          <path d="M16 30 Q26 20 36 30" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.7"/>
+          <circle cx="26" cy="22" r="3" fill="#C9A84C" opacity="0.6"/>
+          <line x1="26" y1="6" x2="26" y2="10" stroke="#C9A84C" stroke-width="1.5" opacity="0.7"/>
+        </svg>
+        <div class="venue-name">Devaki<br/>Convention Hall</div>
+        <p class="venue-place">Brahamavara, Karnataka</p>
+        <div class="venue-date-box">
+          <p class="venue-date-text">
+            Wednesday, 13th May 2026
+            <span>Do join us and celebrate with love 🌿</span>
+          </p>
+        </div>
+        <div class="divider" style="margin-top:18px;"></div>
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--text-mid);">Ankitha &amp; Kishan</p>
+      </div>
+
+      <!-- PAGE 4: MESSAGE -->
+      <div class="page" id="page-4">
+        <div class="leaf-top"></div>
+        <p class="msg-heading">✦ Dear Guests ✦</p>
+        <p class="msg-body">
+          With hearts full of joy and<br/>
+          eyes sparkling with love,<br/>
+          <strong style="font-weight:500;color:var(--green-dark);">Ankitha &amp; Kishan</strong><br/>
+          invite you to be a part of<br/>
+          the most magical chapter<br/>
+          of their love story.
+          <br/><br/>
+          Your presence will make<br/>
+          this day infinitely more<br/>
+          beautiful and complete. 🌿
+        </p>
+        <div class="divider"></div>
+        <p class="msg-sign">With all our love</p>
+      </div>
+
+      <!-- PAGE 5: COUPLE IMAGE -->
+      <div class="page" id="page-5">
+        <p style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">✦ Together ✦</p>
+        <div class="photo-frame" id="photo-frame">
+          <img id="couple-img" src="couple.jpg" alt="Ankitha & Kishan"
+               onerror="this.style.display='none';document.getElementById('photo-placeholder').style.display='flex'" style="display:block;" />
+          <div class="photo-placeholder" id="photo-placeholder" style="display:none;" onclick="event.stopPropagation();document.getElementById('img-upload').click();">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="#3D6B50" stroke-width="1.5" stroke-dasharray="4 2"/><path d="M20 13 L20 27 M13 20 L27 20" stroke="#3D6B50" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Tap here to add<br/>your couple photo
+          </div>
+        </div>
+        <p class="photo-caption">Ankitha &amp; Kishan</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:var(--text-mid);margin-top:4px;">13 · 05 · 2026</p>
+        <input type="file" id="img-upload" accept="image/*" style="display:none;" onchange="loadPhoto(this)" />
+      </div>
+
+      <!-- CLICK HINT -->
+      <div class="click-hint" id="click-hint">
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 6 L10 6 M7 3 L10 6 L7 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        tap to turn
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PAGE COUNTER -->
+<div class="page-counter">
+  <div class="page-dot active" id="dot-1" onclick="goTo(1)"></div>
+  <div class="page-dot" id="dot-2" onclick="goTo(2)"></div>
+  <div class="page-dot" id="dot-3" onclick="goTo(3)"></div>
+  <div class="page-dot" id="dot-4" onclick="goTo(4)"></div>
+  <div class="page-dot" id="dot-5" onclick="goTo(5)"></div>
+</div>
+<p class="page-num-label" id="page-label" style="margin-top:8px;">1 / 5</p>
+
+<script>
+  const TOTAL = 5;
+  let current = 1;
+  let isFlipping = false;
+  const card = document.getElementById('card');
+
+  function updateUI(n) {
+    for (let i = 1; i <= TOTAL; i++) {
+      document.getElementById('page-' + i).classList.toggle('active', i === n);
+      document.getElementById('dot-' + i).classList.toggle('active', i === n);
+    }
+    document.getElementById('page-label').textContent = n + ' / ' + TOTAL;
+    const hint = document.getElementById('click-hint');
+    hint.innerHTML = n < TOTAL
+      ? '<svg viewBox="0 0 12 12" fill="none"><path d="M2 6 L10 6 M7 3 L10 6 L7 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg> tap to turn'
+      : '<svg viewBox="0 0 12 12" fill="none"><path d="M10 6 L2 6 M5 3 L2 6 L5 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg> tap to go back';
+  }
+
+  function advance() {
+    if (isFlipping) return;
+    flipTo(current < TOTAL ? current + 1 : 1);
+  }
+
+  function goTo(n) {
+    if (isFlipping || n === current) return;
+    flipTo(n);
+  }
+
+  function flipTo(n) {
+    isFlipping = true;
+    card.classList.add('flipping');
+    setTimeout(() => {
+      current = n;
+      updateUI(n);
+      card.classList.remove('flipping');
+      card.classList.add('unflipping');
+      setTimeout(() => { card.classList.remove('unflipping'); isFlipping = false; }, 300);
+    }, 300);
+  }
+
+  // COUNTDOWN — counts to midnight of May 13 in your local timezone
+  const EVENT = new Date(2026, 4, 13, 0, 0, 0);
+  function tick() {
+    const diff = EVENT - new Date();
+    if (diff <= 0) {
+      document.getElementById('countdown-grid').innerHTML =
+        '<p style="grid-column:1/-1;font-family:Cormorant Garamond,serif;font-style:italic;font-size:22px;color:var(--green-dark);text-align:center;">🎉 The celebration has begun!</p>';
+      return;
+    }
+    document.getElementById('cd-days').textContent  = String(Math.floor(diff / 86400000)).padStart(2, '0');
+    document.getElementById('cd-hours').textContent = String(Math.floor(diff % 86400000 / 3600000)).padStart(2, '0');
+    document.getElementById('cd-mins').textContent  = String(Math.floor(diff % 3600000 / 60000)).padStart(2, '0');
+    document.getElementById('cd-secs').textContent  = String(Math.floor(diff % 60000 / 1000)).padStart(2, '0');
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  // PHOTO UPLOAD
+  function loadPhoto(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = document.getElementById('couple-img');
+      img.src = e.target.result;
+      img.style.display = 'block';
+      document.getElementById('photo-placeholder').style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  }
+</script>
+</body>
+</html>
